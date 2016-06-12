@@ -1,0 +1,52 @@
+diff -urN msgpack-1.4.2.orig/CMakeLists.txt msgpack-1.4.2/CMakeLists.txt
+--- msgpack-1.4.2.orig/CMakeLists.txt	2016-05-26 12:46:08.000000000 +0200
++++ msgpack-1.4.2/CMakeLists.txt	2016-05-30 23:09:47.647459179 +0200
+@@ -20,6 +20,7 @@
+ OPTION (MSGPACK_CXX11 "Using c++11 compiler" OFF)
+ OPTION (MSGPACK_32BIT "32bit compile" OFF)
+ OPTION (MSGPACK_BOOST "Using boost libraries" OFF)
++OPTION (MSGPACK_STATIC "Build static library" ON)
+ 
+ SET (CMAKE_CXX_FLAGS "-DMSGPACK_DISABLE_LEGACY_NIL ${CMAKE_CXX_FLAGS}")
+ SET (CMAKE_CXX_FLAGS "-DMSGPACK_DISABLE_LEGACY_CONVERT ${CMAKE_CXX_FLAGS}")
+@@ -263,10 +264,13 @@
+     )
+ ENDIF ()
+ 
+-ADD_LIBRARY (msgpackc-static STATIC
+-    ${msgpackc_SOURCES}
+-    ${msgpackc_HEADERS}
+-)
++IF (MSGPACK_STATIC)
++    ADD_LIBRARY (msgpack-static STATIC
++        ${msgpack_SOURCES}
++        ${msgpack_HEADERS}
++    )
++    INSTALL (TARGETS msgpack-static DESTINATION ${CMAKE_INSTALL_LIBDIR})
++ENDIF ()
+ 
+ SET_TARGET_PROPERTIES (msgpackc-static PROPERTIES OUTPUT_NAME "msgpackc")
+ IF (MSGPACK_ENABLE_SHARED)
+@@ -283,13 +287,6 @@
+     ADD_SUBDIRECTORY (test)
+ ENDIF ()
+ 
+-IF ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+-    IF (MSGPACK_ENABLE_SHARED)
+-        SET_PROPERTY (TARGET msgpackc APPEND_STRING PROPERTY COMPILE_FLAGS "-Wall -Wextra -Werror -g -O3 -DPIC")
+-    ENDIF ()
+-    SET_PROPERTY (TARGET msgpackc-static APPEND_STRING PROPERTY COMPILE_FLAGS "-Wall -Wextra -Werror -g -O3" )
+-ENDIF ()
+-
+ IF ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+     SET_PROPERTY (TARGET msgpackc APPEND_STRING PROPERTY COMPILE_FLAGS " -Wno-mismatched-tags")
+ ENDIF ()
+@@ -324,7 +321,7 @@
+ IF (MSGPACK_ENABLE_SHARED)
+     SET (MSGPACK_INSTALLTARGETS msgpackc msgpackc-static)
+ ELSE()
+-    SET (MSGPACK_INSTALLTARGETS msgpackc-static)
++    SET (MSGPACK_INSTALLTARGETS msgpackc)
+ ENDIF ()
+ 
+ INSTALL (TARGETS ${MSGPACK_INSTALLTARGETS} DESTINATION ${CMAKE_INSTALL_LIBDIR})
