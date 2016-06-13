@@ -16,6 +16,8 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND}"
 
+S="${WORKDIR}/${PN}-${P}"
+
 src_compile() {
 	emake || die
 }
