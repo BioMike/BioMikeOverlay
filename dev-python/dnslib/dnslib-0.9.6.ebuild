@@ -10,6 +10,10 @@ DESCRIPTION="A simple library to encode/decode DNS wire-format packets."
 HOMEPAGE="https://bitbucket.org/paulc/dnslib"
 SRC_URI="https://bitbucket.org/paulc/dnslib/get/${PV}.tar.bz2 -> ${P}.tar.bz2"
 
+
+MY_P="paulc-${PN}-c6871d81b4f8"
+S=${WORKDIR}/${MY_P}
+
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
