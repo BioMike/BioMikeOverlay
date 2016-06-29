@@ -1,0 +1,39 @@
+diff -Naur digibyte-3.0.3.orig/configure.ac digibyte-3.0.3/configure.ac
+--- digibyte-3.0.3.orig/configure.ac	2014-11-26 08:09:33.000000000 +0100
++++ digibyte-3.0.3/configure.ac	2015-11-11 21:07:17.339212549 +0100
+@@ -378,10 +378,22 @@
+  [ AC_MSG_RESULT(no)]
+ )
+ 
++dnl Check for leveldb, only if explicitly requested
+ LEVELDB_CPPFLAGS=
+ LIBLEVELDB=
+ LIBMEMENV=
+-AM_CONDITIONAL([EMBEDDED_LEVELDB],[true])
++AC_ARG_WITH([system-leveldb],
++  [AS_HELP_STRING([--with-system-leveldb],
++  [Build with system LevelDB (default is no; DANGEROUS; NOT SUPPORTED)])],
++  [system_leveldb=$withval],
++  [system_leveldb=no]
++)
++if test x$system_leveldb != xno; then
++  LEVELDB_CPPFLAGS=
++  LIBLEVELDB=-lleveldb
++  LIBMEMENV=-lmemenv
++fi
++AM_CONDITIONAL([EMBEDDED_LEVELDB],[test x$system_leveldb = xno])
+ AC_SUBST(LEVELDB_CPPFLAGS)
+ AC_SUBST(LIBLEVELDB)
+ AC_SUBST(LIBMEMENV)
+diff -Naur digibyte-3.0.3.orig/src/leveldbwrapper.cpp digibyte-3.0.3/src/leveldbwrapper.cpp
+--- digibyte-3.0.3.orig/src/leveldbwrapper.cpp	2014-11-26 08:09:33.000000000 +0100
++++ digibyte-3.0.3/src/leveldbwrapper.cpp	2015-11-11 21:30:18.030281344 +0100
+@@ -10,7 +10,7 @@
+ #include <leveldb/cache.h>
+ #include <leveldb/env.h>
+ #include <leveldb/filter_policy.h>
+-#include <memenv.h>
++#include <leveldb/helpers/memenv.h>
+ 
+ void HandleError(const leveldb::Status &status) throw(leveldb_error) {
+     if (status.ok())
