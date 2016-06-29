@@ -6,7 +6,7 @@ EAPI=5
 
 DB_VER="4.8"
 
-LANGS="is nl"
+LANGS="en is nl"
 
 inherit autotools db-use eutils fdo-mime gnome2-utils kde4-functions qt4-r2
 
