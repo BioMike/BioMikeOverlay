@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python hashing function for the Skein blockchain algorithm"
 HOMEPAGE="https://github.com/BioMike/py-bca-skein"
-SRC_URI="https://github.com/BioMike/${PN}/archive/${PV}.tar.gz"
+SRC_URI="https://github.com/BioMike/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"

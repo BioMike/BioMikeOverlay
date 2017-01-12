@@ -10,7 +10,7 @@ inherit distutils-r1
 
 DESCRIPTION="Python hashing function for the Scrypt blockchain algorithm"
 HOMEPAGE="https://github.com/BioMike/py-bca-scrypt"
-SRC_URI="https://github.com/BioMike/${PN}/archive/${PV}.tar.gz"
+SRC_URI="https://github.com/BioMike/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
