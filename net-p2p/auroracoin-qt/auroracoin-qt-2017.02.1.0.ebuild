@@ -92,7 +92,7 @@ src_configure() {
 		--enable-wallet \
 		--disable-ccache \
 		--disable-tests \
-		#--with-system-leveldb \
+		--with-system-leveldb \
 		#--with-system-libsecp256k1  \
 		$(use_with cli) \
 		$(use_with daemon)  \
