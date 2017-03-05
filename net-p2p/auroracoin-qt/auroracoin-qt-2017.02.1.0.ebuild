@@ -20,7 +20,7 @@ SRC_URI="https://github.com/aurarad/${MyPN}/archive/${PV}.tar.gz -> ${MyP}.tar.g
 LICENSE="MIT ISC GPL-3 LGPL-2.1 public-domain || ( CC-BY-SA-3.0 LGPL-2.1 )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="daemon cli dbus kde +qrcode qt upnp"
+IUSE="daemon cli dbus kde +qrcode +qt upnp"
 
 RDEPEND="
 	dev-libs/boost[threads(+)]
