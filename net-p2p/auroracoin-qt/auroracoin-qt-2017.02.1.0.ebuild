@@ -106,7 +106,7 @@ src_install() {
 	default
 
 	insinto /usr/share/pixmaps
-	newins "media/pixmaps/auroracoin.ico"
+	newins "media/pixmaps/auroracoin.ico" "auroracoin.ico"
 
 	make_desktop_entry "${PN} %u" "Auroracoin-Qt" "/usr/share/pixmaps/auroracoin.ico" "Qt;Network;P2P;Office;Finance;" "MimeType=x-scheme-handler/auroracoin;\nTerminal=false"
 
