@@ -93,7 +93,6 @@ src_configure() {
 		--disable-ccache \
 		--disable-tests \
 		--with-system-leveldb \
-		#--with-system-libsecp256k1  \
 		$(use_with cli) \
 		$(use_with daemon)  \
 		$(use_with qt gui) \
