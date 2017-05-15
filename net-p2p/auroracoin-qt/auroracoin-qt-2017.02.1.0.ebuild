@@ -23,6 +23,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="daemon cli dbus kde +qrcode +qt upnp"
 
 RDEPEND="
+	virtual/bitcoin-leveldb
 	dev-libs/boost[threads(+)]
 	dev-libs/openssl:0[-bindist]
 	dev-libs/protobuf:=
@@ -104,10 +105,12 @@ src_configure() {
 src_install() {
 	default
 
-	insinto /usr/share/pixmaps
-	newins "media/pixmaps/auroracoin.ico" "auroracoin.ico"
+	if use qt; then
+		insinto /usr/share/pixmaps
+		newins "media/pixmaps/auroracoin.ico" "auroracoin.ico"
 
-	make_desktop_entry "${PN} %u" "Auroracoin-Qt" "/usr/share/pixmaps/auroracoin.ico" "Qt;Network;P2P;Office;Finance;" "MimeType=x-scheme-handler/auroracoin;\nTerminal=false"
+		make_desktop_entry "${PN} %u" "Auroracoin-Qt" "/usr/share/pixmaps/auroracoin.ico" "Qt;Network;P2P;Office;Finance;" "MimeType=x-scheme-handler/auroracoin;\nTerminal=false"
+	fi
 
 	newman debian/manpages/auroracoin-qt.1 ${PN}.1
 	newman debian/manpages/auroracoin.conf.5 ${PN}.conf.5
@@ -125,9 +128,13 @@ update_caches() {
 }
 
 pkg_postinst() {
-	update_caches
+	if use qt; then
+		update_caches
+	fi
 }
 
 pkg_postrm() {
-	update_caches
+	if use qt; then
+		update_caches
+	fi
 }
