@@ -43,9 +43,9 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/0.9.0-sys_leveldb.patch
-	epatch "${FILESDIR}"/litecoind-0.10.2.2-memenv_h.patch
-	epatch "${FILESDIR}"/litecoind-0.10.2.2-fix-gnustack.patch
-	epatch "${FILESDIR}"/${P}-gcc6.patch
+	epatch "${FILESDIR}"/litecoind-0.14.2-memenv_h.patch
+	#epatch "${FILESDIR}"/litecoind-0.10.2.2-fix-gnustack.patch
+	#epatch "${FILESDIR}"/${P}-gcc6.patch
 	eautoreconf
 	rm -r src/leveldb
 }
@@ -93,8 +93,7 @@ src_install() {
 	dosym /etc/litecoin/litecoin.conf /var/lib/litecoin/.litecoin/litecoin.conf
 
 	dodoc doc/README.md doc/release-notes.md
-	newman contrib/debian/manpages/bitcoind.1 litecoind.1
-	newman contrib/debian/manpages/bitcoin.conf.5 litecoin.conf.5
+	doman doc/man/litecoind.1
 
 	if use logrotate; then
 		insinto /etc/logrotate.d
