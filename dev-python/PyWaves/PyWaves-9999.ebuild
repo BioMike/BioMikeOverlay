@@ -4,7 +4,7 @@
 EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
-inherit distutils-r1 git-r3
+inherit python-r1 git-r3
 
 DESCRIPTION="Object-oriented library for the Waves blockchain platform."
 HOMEPAGE="https://github.com/PyWaves/PyWaves"
@@ -21,3 +21,14 @@ DEPEND="
 	dev-python/pyblake2[$PYTHON_USEDEP]
 	dev-python/base58[$PYTHON_USEDEP]
 "
+
+src_install() {
+        # doing this manually because PyWaves lacks a way to install
+        # automatically
+        local files="__init__.py address.py asset.py crypto.py order.py"
+
+        mkdir PyWaves || die
+        ln ${files} PyWaves/ || die
+        python_foreach_impl python_domodule PyWaves
+        dodoc README.md
+}
