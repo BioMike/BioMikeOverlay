@@ -27,8 +27,8 @@ src_install() {
         # automatically
         local files="__init__.py address.py asset.py crypto.py order.py"
 
-        mkdir PyWaves || die
-        ln ${files} PyWaves/ || die
-        python_foreach_impl python_domodule PyWaves
+        mkdir pywaves || die
+        ln ${files} pywaves/ || die
+        python_foreach_impl python_domodule pywaves
         dodoc README.md
 }
