@@ -1,0 +1,12 @@
+diff --git a/src/httpserver.cpp b/src/httpserver.cpp
+index 811377718..d9c711332 100644
+--- a/src/httpserver.cpp
++++ b/src/httpserver.cpp
+@@ -15,6 +15,7 @@
+#include <sync.h>
+#include <ui_interface.h>
+
++#include <deque>
+#include <memory>
+#include <stdio.h>
+#include <stdlib.h>

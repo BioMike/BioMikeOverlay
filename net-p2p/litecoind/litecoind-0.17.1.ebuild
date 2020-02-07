@@ -43,6 +43,7 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${FILESDIR}"/0.9.0-sys_leveldb.patch
+	epatch "${FILESDIR}"/0.17.1-deqeu-fix.patch
 	epatch "${FILESDIR}"/litecoind-0.14.2-memenv_h.patch
 	#epatch "${FILESDIR}"/litecoind-0.10.2.2-fix-gnustack.patch
 	#epatch "${FILESDIR}"/${P}-gcc6.patch
