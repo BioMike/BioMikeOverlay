@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI="5"
-mingw32_variants=$(echo {,i{6,5,4,3}86-{,pc-,w32-,w64-}}mingw32)
+mingw32_variants=$(echo {x86_64-,i{6,5,4,3}86-}{pc-,w32-,w64-}mingw32)
 
 inherit eutils
 
