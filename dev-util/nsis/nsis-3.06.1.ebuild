@@ -44,21 +44,6 @@ pkg_pretend() {
 }
 
 src_prepare() {
-    local files=(
-	SConstruct
-	SCons/Tools/crossmingw.py
-	SCons/Config/gnu
-	SCons/utils.py
-	Scripts/release.py
-	Source/exehead/SConscript
-	Source/Tests/icons.py
-	Source/Tests/SConscript
-	Contrib/Graphics/SConscript
-	"Contrib/Modern UI/SConscript"
-	"Contrib/Modern UI 2/SConscript"
-    )
-    2to3 --write --no-diffs --nobackups "${files[@]}"
-
     # a dirty but effective way of killing generated docs
     use doc || echo > Docs/src/SConscript
 }
