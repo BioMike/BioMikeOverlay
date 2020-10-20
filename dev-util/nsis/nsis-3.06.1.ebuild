@@ -59,7 +59,7 @@ get_additional_options() {
 	STRIP=no
     echo \
 	SKIPSTUBS=\"$(use zlib || echo zlib) $(use bzip2 || echo bzip2)\" \
-	SKIPUTILS=\"NSIS Menu\"
+	SKIPUTILS=\"'NSIS Menu','zip2exe'\"
     use config-log && echo NSIS_CONFIG_LOG=yes
 
     local tcpfx=$($(mingw_CTARGET)-gcc -print-file-name=libshell32.a)
@@ -67,8 +67,9 @@ get_additional_options() {
     echo \
 	PREFIX_PLUGINAPI_INC=${tcpfx}/include \
 	PREFIX_PLUGINAPI_LIB=${tcpfx}/lib \
-	ZLIB_W32=$(mingw_CTARGET)-gcc -print-file-name=libz.dll.a
-    echo CROSS_W32=$(mingw_CTARGET)-
+	ZLIB_W32=${tcpfx}/lib \
+	TARGET_ARCH=amd64
+    echo XGCC_W32_PREFIX=$(mingw_CTARGET)-
 }
 
 do_scons() {
