@@ -66,7 +66,8 @@ get_additional_options() {
     tcpfx=${tcpfx%/lib/libshell32.a}
     echo \
 	PREFIX_PLUGINAPI_INC=${tcpfx}/include \
-	PREFIX_PLUGINAPI_LIB=${tcpfx}/lib
+	PREFIX_PLUGINAPI_LIB=${tcpfx}/lib \
+	ZLIB_W32=${tcpfx}/lib
     echo CROSS_W32=$(mingw_CTARGET)-
 }
 
