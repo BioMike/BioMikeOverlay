@@ -67,7 +67,7 @@ get_additional_options() {
     echo \
 	PREFIX_PLUGINAPI_INC=${tcpfx}/include \
 	PREFIX_PLUGINAPI_LIB=${tcpfx}/lib \
-	ZLIB_W32=${tcpfx}/lib
+	ZLIB_W32=$($(mingw_CTARGET)-gcc -print-file-name=libz.dll.a
     echo CROSS_W32=$(mingw_CTARGET)-
 }
 
