@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI="5"
-mingw32_variants=$(echo {x86_64-,i{6,5,4,3}86-}{pc-,w32-,w64-}mingw32)
+mingw32_variants=$(echo i{6,5,4,3}86-{pc-,w32-,w64-}mingw32)
 
 inherit eutils
 
@@ -67,8 +67,7 @@ get_additional_options() {
     echo \
 	PREFIX_PLUGINAPI_INC=${tcpfx}/include \
 	PREFIX_PLUGINAPI_LIB=${tcpfx}/lib \
-	ZLIB_W32=${tcpfx}/lib \
-	TARGET_ARCH=amd64
+	ZLIB_W32=${tcpfx}/lib
     echo XGCC_W32_PREFIX=$(mingw_CTARGET)-
 }
 
