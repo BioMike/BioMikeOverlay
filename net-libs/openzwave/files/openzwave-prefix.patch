@@ -1,0 +1,73 @@
+diff -Naur a/openzwave-1.6.1545/cpp/build/Makefile b/openzwave-1.6.1545/cpp/build/Makefile
+--- a/openzwave-1.6.1545/cpp/build/Makefile	2020-11-10 22:07:49.000000000 +0100
++++ b/openzwave-1.6.1545/cpp/build/Makefile	2020-12-23 21:21:00.618581119 +0100
+@@ -213,7 +213,7 @@
+ 	@echo "Making libopenzwave pkg-config file"
+ 	@$(SED) \
+ 		-e 's|[@]prefix@|$(PREFIX)|g' \
+-		-e 's|[@]exec_prefix@|$(PREFIX)/bin|g' \
++		-e 's|[@]exec_prefix@|$(PREFIX)/usr/bin|g' \
+ 		-e 's|[@]libdir@|$(instlibdir)|g' \
+ 		-e 's|[@]includedir@|$(includedir)/|g' \
+                 -e 's|[@]sysconfdir@|$(sysconfdir)/|g' \
+@@ -282,9 +282,9 @@
+ 	@echo "Installing Pkg-config Files"
+ 	@install -d $(DESTDIR)/$(pkgconfigdir) 
+ 	@cp $(top_builddir)/libopenzwave.pc $(DESTDIR)/$(pkgconfigdir)
+-	@install -d $(DESTDIR)/$(PREFIX)/bin/
+-	@cp $(top_builddir)/ozw_config $(DESTDIR)/$(PREFIX)/bin/ozw_config
+-	@chmod 755 $(DESTDIR)/$(PREFIX)/bin/ozw_config
++	@install -d $(DESTDIR)/$(PREFIX)/usr/bin/
++	@cp $(top_builddir)/ozw_config $(DESTDIR)/$(PREFIX)/usr/bin/ozw_config
++	@chmod 755 $(DESTDIR)/$(PREFIX)/usr/bin/ozw_config
+ 
+ 
+ 
+diff -Naur a/openzwave-1.6.1545/cpp/build/support.mk b/openzwave-1.6.1545/cpp/build/support.mk
+--- a/openzwave-1.6.1545/cpp/build/support.mk	2020-11-10 22:07:49.000000000 +0100
++++ b/openzwave-1.6.1545/cpp/build/support.mk	2020-12-23 21:27:26.825508531 +0100
+@@ -140,11 +140,11 @@
+ #if /lib64 exists, then setup x86_64 library path to lib64 (good indication if a linux has /lib and lib64). 
+ #Else, if it doesnt, then set as /lib. This is used in the make install target 
+ ifeq ($(wildcard /lib64),)
+-instlibdir.x86_64 = /lib/
++instlibdir.x86_64 = /usr/lib/
+ else
+-instlibdir.x86_64 = /lib64/
++instlibdir.x86_64 = /usr/lib64/
+ endif
+-instlibdir.default   = /lib/
++instlibdir.default = /usr/lib/
+ 
+ #our actual install location for the library
+ ifneq ($(instlibdir.$(MACHINE)),)
+@@ -162,12 +162,12 @@
+ 
+ ifeq ($(BITBAKE_ENV),1)
+ sysconfdir := $(PREFIX)/etc/openzwave/
+-includedir := $(PREFIX)/include/openzwave/
+-docdir := $(PREFIX)/share/doc/openzwave-$(VERSION).$(VERSION_REV)
++includedir := $(PREFIX)/usr/include/openzwave/
++docdir := $(PREFIX)/usr/share/doc/openzwave-$(VERSION).$(VERSION_REV)
+ else
+ sysconfdir ?= $(PREFIX)/etc/openzwave/
+-includedir ?= $(PREFIX)/include/openzwave/
+-docdir ?= $(PREFIX)/share/doc/openzwave-$(VERSION).$(VERSION_REV)
++includedir ?= $(PREFIX)/usr/include/openzwave/
++docdir ?= $(PREFIX)/usr/share/doc/openzwave-$(VERSION).$(VERSION_REV)
+ endif
+ 
+ top_builddir ?= $(CURDIR)
+diff -Naur a/openzwave-1.6.1545/cpp/examples/MinOZW/Makefile b/openzwave-1.6.1545/cpp/examples/MinOZW/Makefile
+--- a/openzwave-1.6.1545/cpp/examples/MinOZW/Makefile	2020-11-10 22:07:49.000000000 +0100
++++ b/openzwave-1.6.1545/cpp/examples/MinOZW/Makefile	2020-12-23 21:21:39.684293366 +0100
+@@ -90,6 +90,6 @@
+ 
+ install: $(OBJDIR)/MinOZW
+ 	@echo "Installing into Prefix: $(PREFIX)"
+-	@install -d $(DESTDIR)/$(PREFIX)/bin/
+-	@cp $(OBJDIR)/MinOZW $(DESTDIR)/$(PREFIX)/bin/MinOZW
+-	@chmod 755 $(DESTDIR)/$(PREFIX)/bin/MinOZW
++	@install -d $(DESTDIR)/$(PREFIX)/usr/bin/
++	@cp $(OBJDIR)/MinOZW $(DESTDIR)/$(PREFIX)/usr/bin/MinOZW
++	@chmod 755 $(DESTDIR)/$(PREFIX)/usr/bin/MinOZW

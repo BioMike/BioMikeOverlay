@@ -17,6 +17,12 @@ IUSE=""
 DEPEND=""
 RDEPEND=""
 
+src_prepare() {
+    eapply -p2 "${FILESDIR}/${PN}-prefix.patch"
+    eapply_user
+}
+
+
 src_install() {
-        DESTDIR="${D}" PREFIX="/usr" emake install
+        DESTDIR="${D}" PREFIX="/" emake install
 }
