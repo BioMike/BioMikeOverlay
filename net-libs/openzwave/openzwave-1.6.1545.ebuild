@@ -18,5 +18,5 @@ DEPEND=""
 RDEPEND=""
 
 src_install() {
-        PREFIX="/usr" emake install
+        DESTDIR="${D}" PREFIX="/usr" emake install
 }
