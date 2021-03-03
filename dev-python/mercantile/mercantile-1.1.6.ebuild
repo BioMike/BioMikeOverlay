@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
-PYTHON_COMPAT=( python3_{6,7,8} )
+EAPI=7
+PYTHON_COMPAT=( python3_{7,8,9} )
 inherit distutils-r1
 
 DESCRIPTION="Spherical mercator tile and coordinate utilities"
