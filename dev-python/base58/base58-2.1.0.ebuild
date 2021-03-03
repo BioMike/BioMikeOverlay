@@ -2,11 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
-inherit python-r1
+inherit distutils-r1
 
 DESCRIPTION="Base58 and Base58Check implementation compatible with what is used by the bitcoin network."
 HOMEPAGE="https://github.com/keis/base58"
