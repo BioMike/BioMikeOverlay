@@ -1,10 +1,12 @@
 # Copyright 2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
+PYTHON_COMPAT=( python3_{7,8,9} )
+
 inherit python-r1 git-r3
+
 
 DESCRIPTION="Object-oriented library for the Waves blockchain platform."
 HOMEPAGE="https://github.com/PyWaves/PyWaves"
@@ -18,7 +20,6 @@ IUSE=""
 DEPEND="
 	dev-python/requests[$PYTHON_USEDEP]
 	dev-python/python-axolotl-curve25519[$PYTHON_USEDEP]
-	dev-python/pyblake2[$PYTHON_USEDEP]
 	dev-python/base58[$PYTHON_USEDEP]
 "
 
