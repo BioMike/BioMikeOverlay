@@ -1,0 +1,15 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Auroracoin
+Comment=Connect to the Auroracoin P2P Network
+Comment[de]=Verbinde mit dem Auroracoin peer-to-peer Netzwerk
+Comment[fr]=Auroracoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Auroracoin, eşten eşe kriptografik sanal para birimi
+Exec=auroracoin-qt %u
+Terminal=false
+Type=Application
+Icon=auroracoin
+MimeType=x-scheme-handler/auroracoin;
+Categories=Office;Finance;P2P;Network;Qt;
+StartupWMClass=Auroracoin-qt
