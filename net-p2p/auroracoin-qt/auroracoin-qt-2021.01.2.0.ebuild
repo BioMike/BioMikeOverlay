@@ -45,6 +45,8 @@ BDEPEND="
 	dev-qt/linguist-tools:5
 "
 
+S="${WORKDIR}/${MyP}"
+
 DOCS=(
 	doc/bips.md
 	doc/auroracoin-conf.md
@@ -65,10 +67,12 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	sed -i 's/^\(complete -F _auroracoind \)auroracoind \(auroracoin-qt\)$/\1\2/' contrib/auroracoind.bash-completion || die
+	#@sed -i 's/^\(complete -F _auroracoind \)auroracoind \(auroracoin-qt\)$/\1\2/' contrib/auroracoind.bash-completion || die
 
 	# Save the generic icon for later
-	cp src/qt/res/src/auroracoin.svg auroracoin128.svg || die
+	#cp src/qt/res/src/auroracoin.svg auroracoin128.svg || die
+
+	eapply "${FILESDIR}/2021.01.2.0_system_leveldb.patch"
 
 	eapply_user
 
@@ -77,7 +81,7 @@ src_prepare() {
 	echo "#define BUILD_SUFFIX gentoo${PVR#${PV}}" >src/obj/build.h || die
 
 	eautoreconf
-	rm -r src/secp256k1 || die
+	#rm -r src/secp256k1 || die
 	if use system-leveldb; then
 		rm -r src/leveldb || die
 	fi
@@ -115,15 +119,15 @@ src_install() {
 
 	rm -f "${ED}/usr/bin/test_auroracoin" || die
 
-	insinto /usr/share/icons/hicolor/scalable/apps/
-	doins auroracoin128.svg
+	#insinto /usr/share/icons/hicolor/scalable/apps/
+	#doins auroracoin128.svg
 
 	cp "${FILESDIR}/org.auroracoin.auroracoin-qt.desktop" "${T}" || die
 	domenu "${T}/org.auroracoin.auroracoin-qt.desktop"
 
 	use zeromq && dodoc doc/zmq.md
 
-	newbashcomp contrib/auroracoind.bash-completion ${PN}
+	#newbashcomp contrib/auroracoind.bash-completion ${PN}
 
 	if use kde; then
 		insinto /usr/share/kservices5
