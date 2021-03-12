@@ -37,6 +37,8 @@ BDEPEND="
 	>=sys-devel/automake-1.13
 "
 
+S="${WORKDIR}/${MyP}"
+
 DOCS=(
 	doc/bips.md
 	doc/auroracoin-conf.md
@@ -58,6 +60,8 @@ pkg_pretend() {
 
 src_prepare() {
 	#sed -i 's/^\(complete -F _bitcoind bitcoind\) bitcoin-qt$/\1/' contrib/${PN}.bash-completion || die
+
+	eapply "${FILESDIR}/2021.01.2.0_system_leveldb.patch"
 
 	default
 
@@ -105,7 +109,7 @@ src_install() {
 	rm -f "${ED}/usr/bin/test_auroracoin" || die
 
 	insinto /etc/auroracoin
-	newins /share/examples/auroracoin.conf auroracoin.conf
+	newins share/examples/auroracoin.conf auroracoin.conf
 	fowners auroracoin:auroracoin /etc/auroracoin/auroracoin.conf
 	fperms 600 /etc/auroracoin/auroracoin.conf
 
@@ -123,7 +127,7 @@ src_install() {
 
 	use zeromq && dodoc doc/zmq.md
 
-	newbashcomp contrib/${PN}.bash-completion ${PN}
+	#newbashcomp contrib/${PN}.bash-completion ${PN}
 
 	if use examples; then
 		docinto examples
