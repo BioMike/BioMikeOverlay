@@ -1,0 +1,8 @@
+/var/lib/auroracoin/.auroracoin/debug.log {
+	missingok
+	weekly
+	sharedscripts
+	postrotate
+		killall -HUP auroracoind
+	endscript
+}
