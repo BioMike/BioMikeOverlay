@@ -19,7 +19,7 @@ RDEPEND=""
 
 src_prepare() {
     eapply -p2 "${FILESDIR}/${PN}-prefix.patch"
-    eapply -p0 "${FILESDIR}/${PN}_building_error.patch"
+    eapply -p1 "${FILESDIR}/${PN}_building_error.patch"
     eapply_user
 }
 
